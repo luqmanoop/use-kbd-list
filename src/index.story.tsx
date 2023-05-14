@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 
-import { useHeadlessList } from "./index";
+import { useKbdList } from "./index";
 import { CSSProperties } from "react";
 
 const items = Array.from({ length: 25 }, () =>
@@ -14,7 +14,7 @@ const App = () => {
     activeIndex,
     activeElement,
     handleMove
-  } = useHeadlessList<HTMLUListElement>(items.length, "data-index");
+  } = useKbdList<HTMLUListElement>(items.length, "data-index");
 
   const containerStyles: CSSProperties = {
     maxHeight: "400px",

@@ -29,7 +29,7 @@ export type Options = UseHotKeysOptions;
  * @param {Options} [options] react-hotkeys-hook options
  * @returns {ReturnValue<T>}
  */
-export function useHeadlessList<T extends HTMLElement>(
+export function useKbdList<T extends HTMLElement>(
   listLength: number,
   listItemIndexAttribute: string,
   options?: Options
