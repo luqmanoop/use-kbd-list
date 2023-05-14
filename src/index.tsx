@@ -1,6 +1,6 @@
 import { MouseEvent, useCallback, useEffect, useRef, useState } from "react";
 
-import { useHotkeys, Options } from "react-hotkeys-hook";
+import { useHotkeys, Options as UseHotKeysOptions } from "react-hotkeys-hook";
 
 enum Keys {
   ArrowUp = "ArrowUp",
@@ -15,15 +15,18 @@ type ReturnValue<T> = {
   activeIndex: number;
   activeElement: HTMLElement | null;
   setActiveIndex: (index: number) => void;
-  handleMouseMove: (e: MouseEvent) => void;
-  handleMouseLeave: () => void;
+  handleMove: (e: MouseEvent) => void;
+  handleLeave: () => void;
   scrollContainerRef: React.RefObject<T>;
 };
+
+export type Options = UseHotKeysOptions;
 
 /**
  * @template T Type of the container element e.g. HTMLUListElement
  * @param {number} totalListItems Length of the list
  * @param {string} listItemIndexAttribute Attribute name containing an index to find the list item e.g. data-index
+ * @param {Options} [options] react-hotkeys-hook options
  * @returns {ReturnValue<T>}
  */
 export function useHeadlessList<T extends HTMLElement>(
@@ -117,7 +120,7 @@ export function useHeadlessList<T extends HTMLElement>(
     [totalListItems, hoverIndex, activeIndex]
   );
 
-  const handleMouseMove = useCallback(
+  const handleMove = useCallback(
     (e: MouseEvent) => {
       const element = (e.target as HTMLElement)?.closest<HTMLElement>(
         `[${listItemIndexAttribute}]`
@@ -139,7 +142,7 @@ export function useHeadlessList<T extends HTMLElement>(
     [hoverIndex, listItemIndexAttribute]
   );
 
-  const handleMouseLeave = () => setHoverIndex(-2);
+  const handleLeave = () => setHoverIndex(-2);
 
   useHotkeys(
     [
@@ -151,17 +154,15 @@ export function useHeadlessList<T extends HTMLElement>(
       Keys.End
     ],
     handleArrowUpOrDownKeypress,
-    options || {
-      enableOnFormTags: true
-    }
+    options
   );
 
   return {
     activeIndex,
     activeElement,
     setActiveIndex,
-    handleMouseMove,
-    handleMouseLeave,
+    handleMove,
+    handleLeave,
     scrollContainerRef
   };
 }
