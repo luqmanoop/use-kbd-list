@@ -5,17 +5,31 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "readme.md"
+  ],
   "scripts": {
     "build": "tsup",
     "lint": "pretty-quick --staged && eslint src",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "prepublish": "npm run lint && npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codeshifu/use-kbd-list.git"
   },
-  "keywords": [],
+  "keywords": [
+    "react",
+    "react-hook",
+    "list",
+    "listbox",
+    "keyboard",
+    "navigation",
+    "combobox",
+    "smooth-scroll"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
