@@ -13,15 +13,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/codeshifu/use-headless-list.git"
+    "url": "git+https://github.com/codeshifu/use-kbd-list.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/codeshifu/use-headless-list/issues"
+    "url": "https://github.com/codeshifu/use-kbd-list/issues"
   },
-  "homepage": "https://github.com/codeshifu/use-headless-list#readme",
+  "homepage": "https://github.com/codeshifu/use-kbd-list#readme",
   "dependencies": {
     "react": "^18.2.0",
     "react-hotkeys-hook": "^4.4.0"
