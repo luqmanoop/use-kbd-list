@@ -1,3 +1,3 @@
 # use-headless-list
 
-> Plug-n-play hook for adding full Keyboard navigation to your list components.
+> Add full keyboard navigation support to your list components

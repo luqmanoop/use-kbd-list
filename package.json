@@ -1,7 +1,7 @@
 {
   "name": "use-headless-list",
   "version": "0.0.0",
-  "description": "Plug-n-play hook for adding full Keyboard navigation to your list components.",
+  "description": "Add full keyboard navigation support to your list components",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
