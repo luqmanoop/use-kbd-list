@@ -7,6 +7,18 @@ const items = Array.from({ length: 25 }, () =>
   Math.random().toString(36).substring(7)
 );
 
+const attributeName = "data-index";
+
+const containerStyles: CSSProperties = {
+  maxHeight: "400px",
+  maxWidth: "500px",
+  overflowY: "auto",
+  border: "1px solid black",
+  listStyle: "none",
+  padding: 0,
+  margin: 0
+};
+
 const App = () => {
   const {
     scrollContainerRef,
@@ -14,24 +26,11 @@ const App = () => {
     activeIndex,
     activeElement,
     handleMove
-  } = useKbdList<HTMLUListElement>(items.length, "data-index");
-
-  const containerStyles: CSSProperties = {
-    maxHeight: "400px",
-    maxWidth: "500px",
-    overflowY: "auto",
-    border: "1px solid black",
-    listStyle: "none",
-    padding: 0,
-    margin: 0
-  };
-
-  const listItemStyles: CSSProperties = {
-    padding: "6px 10px"
-  };
+  } = useKbdList<HTMLUListElement>(items.length, attributeName);
 
   return (
     <div>
+      {/* List start */}
       <ul
         ref={scrollContainerRef}
         onMouseLeave={handleLeave}
@@ -41,11 +40,11 @@ const App = () => {
         {items.map((item, index) => (
           <li
             key={item}
-            data-index={index}
             onMouseMove={handleMove}
             onPointerMove={handleMove}
+            {...{ [attributeName]: index }}
             style={{
-              ...listItemStyles,
+              padding: "6px 10px",
               backgroundColor: activeIndex === index ? "#eceef4" : "transparent"
             }}
           >
@@ -53,6 +52,8 @@ const App = () => {
           </li>
         ))}
       </ul>
+      {/* List end */}
+
       <pre>
         <code>
           {JSON.stringify(
