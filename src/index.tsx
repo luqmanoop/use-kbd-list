@@ -24,13 +24,13 @@ export type Options = UseHotKeysOptions;
 
 /**
  * @template T Type of the container element e.g. HTMLUListElement
- * @param {number} totalListItems Length of the list
+ * @param {number} listLength Length of the list
  * @param {string} listItemIndexAttribute Attribute name containing an index to find the list item e.g. data-index
  * @param {Options} [options] react-hotkeys-hook options
  * @returns {ReturnValue<T>}
  */
 export function useHeadlessList<T extends HTMLElement>(
-  totalListItems: number,
+  listLength: number,
   listItemIndexAttribute: string,
   options?: Options
 ): ReturnValue<T> {
@@ -40,7 +40,7 @@ export function useHeadlessList<T extends HTMLElement>(
 
   const scrollContainerRef = useRef<T>(null);
 
-  useEffect(() => setActiveIndex(0), [totalListItems]);
+  useEffect(() => setActiveIndex(0), [listLength]);
 
   const getSelectedElement = useCallback(
     (index: number) => {
@@ -86,7 +86,7 @@ export function useHeadlessList<T extends HTMLElement>(
     (e: KeyboardEvent) => {
       e.preventDefault();
 
-      if (totalListItems === 0) return;
+      if (listLength === 0) return;
 
       let nextIndex = -1;
       const isHovering = hoverIndex >= 0;
@@ -94,13 +94,13 @@ export function useHeadlessList<T extends HTMLElement>(
       switch (e.key) {
         case Keys.ArrowUp:
           nextIndex = !isHovering
-            ? (activeIndex - 1 + totalListItems) % totalListItems
-            : (hoverIndex - 1 + totalListItems) % totalListItems;
+            ? (activeIndex - 1 + listLength) % listLength
+            : (hoverIndex - 1 + listLength) % listLength;
           break;
         case Keys.ArrowDown:
           nextIndex = !isHovering
-            ? (activeIndex + 1) % totalListItems
-            : (hoverIndex + 1) % totalListItems;
+            ? (activeIndex + 1) % listLength
+            : (hoverIndex + 1) % listLength;
           break;
         case Keys.PageUp:
         case Keys.Home:
@@ -108,7 +108,7 @@ export function useHeadlessList<T extends HTMLElement>(
           break;
         case Keys.PageDown:
         case Keys.End:
-          nextIndex = totalListItems - 1;
+          nextIndex = listLength - 1;
           break;
       }
 
@@ -117,7 +117,7 @@ export function useHeadlessList<T extends HTMLElement>(
       setActiveIndex(nextIndex);
       setHoverIndex(-1);
     },
-    [totalListItems, hoverIndex, activeIndex]
+    [listLength, hoverIndex, activeIndex]
   );
 
   const handleMove = useCallback(
