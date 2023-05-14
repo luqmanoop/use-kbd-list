@@ -1,6 +1,6 @@
 import { MouseEvent, useCallback, useEffect, useRef, useState } from "react";
 
-import { useHotkeys } from "react-hotkeys-hook";
+import { useHotkeys, Options } from "react-hotkeys-hook";
 
 enum Keys {
   ArrowUp = "ArrowUp",
@@ -28,7 +28,8 @@ type ReturnValue<T> = {
  */
 export function useHeadlessList<T extends HTMLElement>(
   totalListItems: number,
-  listItemIndexAttribute: string
+  listItemIndexAttribute: string,
+  options?: Options
 ): ReturnValue<T> {
   const [hoverIndex, setHoverIndex] = useState(-1);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -150,7 +151,7 @@ export function useHeadlessList<T extends HTMLElement>(
       Keys.End
     ],
     handleArrowUpOrDownKeypress,
-    {
+    options || {
       enableOnFormTags: true
     }
   );
