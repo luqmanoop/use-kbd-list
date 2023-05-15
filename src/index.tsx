@@ -17,7 +17,7 @@ type ReturnValue<T> = {
   setActiveIndex: (index: number) => void;
   handleMove: (e: MouseEvent) => void;
   handleLeave: () => void;
-  scrollContainerRef: React.RefObject<T>;
+  ref: React.RefObject<T>;
 };
 
 export type Options = UseHotKeysOptions;
@@ -27,6 +27,7 @@ export type Options = UseHotKeysOptions;
  * @param {number} listLength Length of the list
  * @param {string} listItemIndexAttribute Attribute name containing an index to find the list item e.g. data-index
  * @param {Options} [options] react-hotkeys-hook options
+ * @example useKbdList<HTMLUListElement>(myList.length, "data-index");
  * @returns {ReturnValue<T>}
  */
 export function useKbdList<T extends HTMLElement>(
@@ -38,7 +39,7 @@ export function useKbdList<T extends HTMLElement>(
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeElement, setActiveElement] = useState<HTMLElement | null>(null);
 
-  const scrollContainerRef = useRef<T>(null);
+  const ref = useRef<T>(null);
 
   useEffect(() => setActiveIndex(0), [listLength]);
 
@@ -61,7 +62,7 @@ export function useKbdList<T extends HTMLElement>(
   }, [activeIndex, getSelectedElement]);
 
   useEffect(() => {
-    const container = scrollContainerRef.current;
+    const container = ref.current;
 
     if (
       !container ||
@@ -82,7 +83,7 @@ export function useKbdList<T extends HTMLElement>(
     });
   }, [activeIndex, hoverIndex, activeElement]);
 
-  const handleArrowUpOrDownKeypress = useCallback(
+  const handleKeypress = useCallback(
     (e: KeyboardEvent) => {
       e.preventDefault();
 
@@ -153,16 +154,16 @@ export function useKbdList<T extends HTMLElement>(
       Keys.Home,
       Keys.End
     ],
-    handleArrowUpOrDownKeypress,
+    handleKeypress,
     options
   );
 
   return {
+    ref,
     activeIndex,
     activeElement,
     setActiveIndex,
     handleMove,
-    handleLeave,
-    scrollContainerRef
+    handleLeave
   };
 }

@@ -3,7 +3,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { useKbdList } from "./index";
 import { CSSProperties } from "react";
 
-const items = Array.from({ length: 25 }, () =>
+const myList = Array.from({ length: 25 }, () =>
   Math.random().toString(36).substring(7)
 );
 
@@ -20,24 +20,19 @@ const containerStyles: CSSProperties = {
 };
 
 const App = () => {
-  const {
-    scrollContainerRef,
-    handleLeave,
-    activeIndex,
-    activeElement,
-    handleMove
-  } = useKbdList<HTMLUListElement>(items.length, attributeName);
+  const { ref, activeIndex, activeElement, handleLeave, handleMove } =
+    useKbdList<HTMLUListElement>(myList.length, "data-index");
 
   return (
     <div>
       {/* List start */}
       <ul
-        ref={scrollContainerRef}
+        ref={ref}
         onMouseLeave={handleLeave}
         onPointerLeave={handleLeave}
         style={containerStyles}
       >
-        {items.map((item, index) => (
+        {myList.map((item, index) => (
           <li
             key={item}
             onMouseMove={handleMove}
