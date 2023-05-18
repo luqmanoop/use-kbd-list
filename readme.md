@@ -6,6 +6,8 @@ Add `ArrowDown`, `ArrowUp`, `PageDown`, `PageUp`, `Home` & `End` keyboard suppor
 
 Live demo https://use-kbd-list.vercel.app
 
+<img src="https://raw.githubusercontent.com/codeshifu/assets/main/gifs/use-kbd-list.gif" alt="use-kbd-list" width="640" />
+
 ## Install
 
 ```sh
