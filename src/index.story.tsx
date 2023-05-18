@@ -21,10 +21,15 @@ const containerStyles: CSSProperties = {
 
 const App = () => {
   const { ref, activeIndex, activeElement, handleLeave, handleMove } =
-    useKbdList<HTMLUListElement>(myList.length, "data-index");
+    useKbdList<HTMLUListElement>(myList.length, "data-index", {
+      enableOnFormTags: true
+    });
 
   return (
     <div>
+      {/* hack to prevent storybook sidebar from being focused on render */}
+      <input autoFocus style={{ opacity: 0, position: "absolute" }} />
+
       {/* List start */}
       <ul
         ref={ref}
