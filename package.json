@@ -1,7 +1,7 @@
 {
   "name": "use-kbd-list",
   "version": "0.0.1-1",
-  "description": "Add full keyboard navigation support to your list components",
+  "description": "Add full keyboard navigation support to your list component",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
