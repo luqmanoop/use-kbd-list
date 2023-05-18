@@ -6,6 +6,12 @@
     "moduleResolution": "node",
     "skipLibCheck": true,
     "strict": true,
-    "noEmit": true
-  }
+    "noEmit": true,
+    "baseUrl": "."
+  },
+  "include": [
+    "jest-setup.ts",
+    "src",
+    "test"
+  ]
 }
