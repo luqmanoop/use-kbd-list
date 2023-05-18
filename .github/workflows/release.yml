@@ -1,0 +1,31 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+jobs:
+  main:
+    uses: ./.github/workflows/main.yml
+  release:
+    if: github.repository_owner == 'codeshifu' && github.ref == 'refs/heads/main'
+    needs: main
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7
+          run_install: true
+
+      - name: Create Release Pull Request or Publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: pnpm release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
