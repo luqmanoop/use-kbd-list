@@ -59,7 +59,7 @@ export function useKbdList<T extends HTMLElement>(
     if (!elem) return;
 
     setActiveElement(elem);
-  }, [activeIndex, getSelectedElement]);
+  }, [activeIndex, listLength, getSelectedElement]);
 
   useEffect(() => {
     const container = ref.current;
